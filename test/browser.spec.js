@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import KuromojiAnalyzer from "kuroshiro-analyzer-kuromoji";
+import Analyzer from "kuroshiro-analyzer-kuromoji";
 import Kuroshiro from "../src";
 
 describe("Kuroshiro Browser Test", () => {
@@ -12,16 +12,15 @@ describe("Kuroshiro Browser Test", () => {
 
     beforeAll(async () => {
         kuroshiro = new Kuroshiro();
-        await kuroshiro.init(new KuromojiAnalyzer());
+        await kuroshiro.init(new Analyzer());
     });
     it("Util Test", () => {
         const ori = "公";
         const result = Kuroshiro.Util.isKanji(ori);
         expect(result).toBeTruthy();
     });
-    it("Convert Test", async () => {
-        const ori = EXAMPLE_TEXT;
-        const result = await kuroshiro.convert(ori, { to: "hiragana" });
+    it("Convert Test", () => {
+        const result = kuroshiro.convert(EXAMPLE_TEXT, { to: "hiragana" });
         expect(result).toEqual("かんじとれたらてをつなごう、かさなるのはじんせいのライン and レミリアさいこう！");
     });
 });
